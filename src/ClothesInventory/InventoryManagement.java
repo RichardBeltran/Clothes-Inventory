@@ -33,37 +33,38 @@ public class InventoryManagement
 			if(st.hasMoreTokens())
 			{
 				String sku = st.nextToken();
+				
 				if(st.hasMoreTokens())
 				{
 					String upc  = st.nextToken();
-					
+					addGarment(iName,dName,oName,q,sku,upc);
 				}
 				else
 				{
-					
+					addGarment(iName,dName,oName,sku,q);
 				}
 			}
 			else
 			{
-				
+				addGarment(iName,dName,oName,q);
 			}
 		}
 		fileIn.close();
 		
 	}
 	//Add Garment using completed information
-	public void addGarment(String n,String d,String c,String s,String u)
+	public void addGarment(String n,String d,String c,String q,String s,String u)
 	{
 		
 	}
 	
 	//will add Garment using name,designer,category then prompt user to add UPC
-	public void addGarment(String n,String d,String c,String s)
+	public void addGarment(String n,String d,String c,String q,String s)
 	{
 		
 	}
 	//add Garment, generates a SKU
-	public void addGarment(String n,String d,String c)
+	public void addGarment(String n,String d,String c,String q)
 	{
 		
 	}
@@ -80,22 +81,29 @@ public class InventoryManagement
 		return true;
 	}
 	//Scan in an item
-	public void scanIn(String upc)
+	public boolean scanIn(String upc,int q)
 	{
 		if(checkUPC(upc))
 		{
-			
+			Garment temp = myInv.searchGarment(upc);
+			myInv.addGarm(temp,q);
+			updateQuantity(temp);
+			return true;
 		}
+	 return false;
+			
 	}
 	//scan out an item
-	public void scanOut(String upc,int q)
+	public boolean scanOut(String upc,int q)
 	{
 		if(checkUPC(upc))
 		{
 			Garment temp = myInv.searchGarment(upc);
 			myInv.removeGarm(temp, q);
 			updateQuantity(temp);
+			return true;
 		}
+		return false;
 	}
 	//writes onto file, Locates item by name then designer changes item 
 	public void updateQuantity(Garment s)

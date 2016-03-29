@@ -1,6 +1,8 @@
 package ClothesInventory;
 
-public class Garment 
+
+
+public class Garment implements Comparable<Garment>
 {
 
 	private int SKU;
@@ -29,7 +31,6 @@ public class Garment
 	}
 	public int addBarcode(String upc)
 	{
-		
 			if(upc.length() == 12)
 			{
 				bcode = new UPC(upc);
@@ -37,7 +38,6 @@ public class Garment
 				
 			}
 			return 0;
-		
 	}
 	public int getSKU()
 	{
@@ -67,6 +67,10 @@ public class Garment
 	{
 		quantity = quantity -1;
 	}
+	public void incrementStock()
+	{
+		quantity = quantity+1;
+	}
 	public int getQuantity()
 	{
 		return quantity;
@@ -74,5 +78,12 @@ public class Garment
 	public UPC getbcode()
 	{
 		return bcode;
+	}
+	
+	//obj1.compareTo(obj2) , Negative = obj1 < obj2
+
+	public int compareTo(Garment o) {
+		
+		return 0;
 	}
 }
